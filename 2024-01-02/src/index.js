@@ -47,8 +47,21 @@ app.post('/signup', (req, res) => {
     return res.json({ success: true });
 });
 
-app.post('/signout', (req, res) => {
-   return res.json({ Success: true });
+app.post('/signin', (req, res) => {
+    const { id, password } = req.body;
+
+    let success = false;
+
+    const isUserByIdAndPassword = () => {
+        const user = users.find(user => {
+            return user.id === id && user.password == encryptPassword(password);
+        });
+        return user !== undefined;
+    }
+
+    if(isUserByIdAndPassword()) success = true;
+
+   return res.json({ success });
     
 });
 
