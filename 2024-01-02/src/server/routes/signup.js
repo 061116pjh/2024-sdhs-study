@@ -17,9 +17,7 @@ module.exports = {
                 'id',
                 'password',
                 'name',
-                'gender',
                 'age',
-                'phoneNumber'
             ]
         );
 
