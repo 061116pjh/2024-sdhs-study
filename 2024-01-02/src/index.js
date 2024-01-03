@@ -47,6 +47,10 @@ app.post('/signup', (req, res) => {
     return res.json({ success: true });
 });
 
+app.post('/signout', (req, res) => {
+   return res.json({ Success: true });
+});
+
 app.patch('/users/:userId', (req, res) => {
     const { userId } = req.params;
     const body = req.body;
