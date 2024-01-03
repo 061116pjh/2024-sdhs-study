@@ -1,15 +1,15 @@
 const _ = require('lodash');
-const { v4: uuidv4 }= require('uuid');
 const data = require('../../db/users');
 const initData = async () => {
     return await data();
 }
 const users = initData();
+const User = require('../../db/users.schema');
 
 module.exports = {
     path: '/signup',
     method: 'post',
-    handler: () => {
+    handler: async (req, res) => {
         const body = req.body;
         const user = _.pick(
             body,
@@ -22,12 +22,13 @@ module.exports = {
                 'phoneNumber'
             ]
         );
-        const findUser = users.every(userId => {
-            return userId.id !== body.id;
-        });
 
-        const successSignup = () => {
-            users.push(Object.assign(user, { idx: uuidv4() }, { password: encryptPassword(body.password) }));
+        const duplicatedUser = async () =>{
+            return await User.findOne({ id: user.id });
+        }
+
+        const successSignup = async () => {
+            await User.create(user);
             return res.json({ success: true });
         }
 
@@ -37,6 +38,6 @@ module.exports = {
             });
         }
 
-        findUser ? successSignup() : failSignup();
+        await duplicatedUser() === null ? successSignup() : failSignup();
     }
 }
