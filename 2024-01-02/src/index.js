@@ -50,7 +50,6 @@ app.get('/users', (req, res) => {
 
 app.post('/signup', (req, res) => {
     const body = req.body;
-    const { id, password } = body;
     const user = _.pick(
         body,
         [   
@@ -63,11 +62,11 @@ app.post('/signup', (req, res) => {
         ]
     );
     const findUser = users.every(userId => {
-        return userId.id !== id;
+        return userId.id !== body.id;
     });
 
     const successSignup = () => {
-        users.push(Object.assign(user, { idx: uuidv4() }, { password: encryptPassword(password) }));
+        users.push(Object.assign(user, { idx: uuidv4() }, { password: encryptPassword(body.password) }));
         return res.json({ success: true });
     }
 
