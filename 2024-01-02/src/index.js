@@ -49,6 +49,7 @@ app.post('/signup', (req, res) => {
 
 app.post('/signout', (req, res) => {
    return res.json({ Success: true });
+    
 });
 
 app.patch('/users/:userId', (req, res) => {
