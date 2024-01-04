@@ -20,6 +20,6 @@ module.exports = {
         
         req.session._id = user._id;
 
-        return res.json({ success: true });
+        return res.redirect('/');
     }
 }
