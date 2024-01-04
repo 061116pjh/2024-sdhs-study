@@ -18,7 +18,8 @@ const signinRoute = require('@route/users/signin');
 const updateUserRoute = require('@route/users/updateUser');
 const deleteUserRoute = require('@route/users/deleteUser');
 
-const createPosts = require('@route/posts/createPost');
+const createPostsRoute = require('@route/posts/createPost');
+const getPostsRoute = require('@route/posts/getPosts');
 
 const routes = [
     signupRoute,
@@ -27,7 +28,8 @@ const routes = [
     users_meRoute,
     updateUserRoute,
     deleteUserRoute,
-    createPosts
+    createPostsRoute,
+    getPostsRoute
 ];
 
 const initExpressApp = require('@server/initExpressApp');
