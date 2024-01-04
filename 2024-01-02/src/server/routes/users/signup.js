@@ -17,7 +17,7 @@ module.exports = {
             ]
         );
 
-        if(await checkDuplicatedId(req.id) !== null) throw new Error('400: 해당 아이디는 사용중입니다.'); 
+        if(await checkDuplicatedId(req.body.id) !== null) throw new Error('400: 해당 아이디는 사용중입니다.'); 
 
         await User.create(
             Object.assign(
