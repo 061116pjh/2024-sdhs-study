@@ -1,5 +1,6 @@
 const express = require('express');
 const session = require('express-session');
+const methodOverride =  require('method-override');
 
 module.exports = (app) => {
     app.set('trust proxy', 1);
@@ -11,4 +12,5 @@ module.exports = (app) => {
     }));
     app.use(express.urlencoded({ extended: true }));
     app.use(express.static('static'));
+    app.use(methodOverride('_method'));
 }
