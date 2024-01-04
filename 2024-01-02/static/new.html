@@ -34,7 +34,6 @@
       background-color: #ffffff;
       box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
       border-radius: 5px;
-
       margin: 20px auto;
       padding: 30px;
       padding-bottom: 0;
@@ -46,7 +45,6 @@
       font-size: 18px;
       border-radius: 5px;
       border: 1px solid black;
-
       margin-top: 20px;
       padding: 5px;
     }
@@ -58,14 +56,12 @@
       border-radius: 5px;
       border: 1px solid black;
       resize: vertical;
-
       padding: 5px;
     }
 
     .submit {
       width: 100%;
       font-size: 16px;
-
       margin-top: 10px;
       padding: 5px;
     }
@@ -80,10 +76,10 @@
   <div class="wrap">
     <h1>블로그</h1>
 
-    <form target="#" method="post" enctype="application/x-www-form-urlencoded">
-      <input type="text" class="title-input" placeholder="제목을 입력하세요.">
+    <form action="/posts" method="post" enctype="application/x-www-form-urlencoded">
+      <input autofocus name="title" type="text" class="title-input" placeholder="제목을 입력하세요.">
 
-      <textarea class="content-input"></textarea>
+      <textarea name="content" class="content-input"></textarea>
 
       <button class="submit">완료</button>
     </form>
