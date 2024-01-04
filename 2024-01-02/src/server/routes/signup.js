@@ -1,5 +1,6 @@
 const _ = require('lodash');
 const User = require('../../db/users.schema');
+const encryptPassword = require('../../lib/encryptPassword');
 
 module.exports = {
     path: '/signup',
@@ -16,21 +17,18 @@ module.exports = {
             ]
         );
 
-        const duplicatedUser = async () =>{
+        const duplicatedUser = async () => {
             return await User.findOne({ id: user.id });
         }
 
-        const successSignup = async () => {
-            await User.create(user);
-            return res.json({ success: true });
-        }
+        if(await duplicatedUser() !== null) throw new Error('400: 해당 아이디는 사용중입니다.'); 
 
-        const failSignup = () => {
-            return res.status(400).json({
-                message: '이미 존재하는 id입니다.'
-            });
-        }
-
-        await duplicatedUser() === null ? successSignup() : failSignup();
+        await User.create(
+            Object.assign(
+                user, 
+                { password: encryptPassword(user.password) }
+            )
+        );
+        return res.json({ success: true });
     }
 }
