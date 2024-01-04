@@ -1,4 +1,4 @@
-const User = require('../../db/users.schema');
+const User = require('@db/users.schema');
 
 module.exports = {
     path: '/users',
