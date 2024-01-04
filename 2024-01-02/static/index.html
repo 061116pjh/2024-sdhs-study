@@ -81,51 +81,55 @@
       padding: 25px;
     }
   </style>
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+  <script>
+    $(document).ready(() => {
+      const bootstrap = async () => {
+        const res = await fetch('/posts', {
+          method: 'get',
+        });
+
+        const posts = await res.json();
+
+        const postTags =  posts.map((post) => {
+          return `
+            <article class="float">
+              <h2 class="title">${post.title}</h2>
+              <p class="content">
+                ${post.content}
+              </p>
+
+              <div class="extra-info">
+                <p>작성일: ${post.createdAt}</p>
+                <p>수정일: ${post.updatedAt}</p>
+              </div>
+
+              <div class="buttons">
+                <a href="#">수정</a>
+                <a href="#">삭제</a>
+              </div>
+            </article>
+          `; 
+        });
+
+        $('#posts').prepend(postTags.reverse());
+      }
+      bootstrap()
+        .catch((err) => {
+          console.error(err);
+        });
+    });
+  </script>
 </head>
 <body>
   <div class="wrap">
     <h1>블로그</h1>
 
-    <section>
-      <article class="float">
-        <h2 class="title">제목입니다.</h2>
-
-        <p class="content">
-          제2항의 재판관중 3인은 국회에서 선출하는 자를, 3인은 대법원장이 지명하는 자를 임명한다. 행정각부의 설치·조직과 직무범위는 법률로 정한다. 대통령은 법률이 정하는 바에 의하여 사면·감형 또는 복권을 명할 수 있다.
-          국회는 의장 1인과 부의장 2인을 선출한다. 국회의원은 그 지위를 남용하여 국가·공공단체 또는 기업체와의 계약이나 그 처분에 의하여 재산상의 권리·이익 또는 직위를 취득하거나 타인을 위하여 그 취득을 알선할 수 없다.
-        </p>
-
-        <div class="extra-info">
-          <p>작성일: 2024 / 01 / 01</p>
-          <p>수정일: 2024 / 01 / 01</p>
-        </div>
-
-        <div class="buttons">
-          <a href="#">수정</a>
-          <a href="#">삭제</a>
-        </div>
-      </article>
-
-      <article class="float">
-        <h2 class="title">제목입니다.</h2>
-        <p class="content">
-          제2항의 재판관중 3인은 국회에서 선출하는 자를, 3인은 대법원장이 지명하는 자를 임명한다. 행정각부의 설치·조직과 직무범위는 법률로 정한다. 대통령은 법률이 정하는 바에 의하여 사면·감형 또는 복권을 명할 수 있다.
-          국회는 의장 1인과 부의장 2인을 선출한다. 국회의원은 그 지위를 남용하여 국가·공공단체 또는 기업체와의 계약이나 그 처분에 의하여 재산상의 권리·이익 또는 직위를 취득하거나 타인을 위하여 그 취득을 알선할 수 없다.
-        </p>
-
-        <div class="extra-info">
-          <p>작성일: 2024 / 01 / 01</p>
-          <p>수정일: 2024 / 01 / 01</p>
-        </div>
-
-        <div class="buttons">
-          <a href="#">수정</a>
-          <a href="#">삭제</a>
-        </div>
-      </article>
+    <section id="posts">
+      
 
       <article class="create-article">
-        <a href="#">+</a>
+        <a href="/new.html">+</a>
       </article>
     </section>
 
