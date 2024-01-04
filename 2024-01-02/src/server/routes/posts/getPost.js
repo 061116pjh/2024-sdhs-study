@@ -6,7 +6,12 @@ module.exports = {
     method: 'get',
     handler: async (req, res) => {
         const { postId } = req.params;
-        const post = await Post.find({ _id: new ObjectId(postId) });
+        // const post = await Post.findOne({ _id: new ObjectId(postId) });
+        const post = await Post.findOneAndUpdate(
+            { _id: new ObjectId(postId) },
+            { $inc: { view: 1} },
+            { new: true } 
+        );
         return res.json(post);
     }
 }
