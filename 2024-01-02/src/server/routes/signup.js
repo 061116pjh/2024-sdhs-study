@@ -1,9 +1,4 @@
 const _ = require('lodash');
-const data = require('../../db/users');
-const initData = async () => {
-    return await data();
-}
-const users = initData();
 const User = require('../../db/users.schema');
 
 module.exports = {
