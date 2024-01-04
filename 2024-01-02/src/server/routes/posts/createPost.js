@@ -12,6 +12,6 @@ module.exports = {
         const post = _.pick(req.body, ['title', 'content']);
         await Post.create({ ...post, author: _id });
 
-        return res.json({ success: true });
+        return res.redirect('/');
     }
 }
