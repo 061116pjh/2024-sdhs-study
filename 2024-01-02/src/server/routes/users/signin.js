@@ -1,5 +1,5 @@
-const User = require('../../db/users.schema');
-const encryptPassword = require("../../lib/encryptPassword");
+const User = require('@db/users.schema');
+const encryptPassword = require("@lib/encryptPassword");
 
 module.exports = {
     path: '/signin',
