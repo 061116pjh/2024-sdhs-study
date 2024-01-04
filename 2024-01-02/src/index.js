@@ -1,52 +1,66 @@
-const _ = require('lodash');
 const express = require('express');
+const moduleAlias = require('module-alias');
+
+moduleAlias.addAliases({
+    '@root': __dirname,
+    '@db': __dirname + '/db',
+    '@route': __dirname + '/server/routes',
+    '@server': __dirname + '/server',
+});
 
 require('dotenv').config();
 
-const app = express();
-const port = process.env.PORT;
-
-const users = require('./db/users');
-const User = require('./db/users.schema');
-
-const usersRoute = require('./server/routes/users');
-const users_meRoute = require('./server/routes/users_me');
-const signupRoute = require('./server/routes/signup');
-const signinRoute = require('./server/routes/signin');
-const editRoute = require('./server/routes/edit');
-const deleteRoute = require('./server/routes/delete');
+const usersRoute = require('@route/users');
+const users_meRoute = require('@route/users_me');
+const signupRoute = require('@route/signup');
+const signinRoute = require('@route/signin');
+const updateUserRoute = require('@route/updateUser');
+const deleteUserRoute = require('@route/deleteUser');
 
 const routes = [
     signupRoute,
     signinRoute,
     usersRoute,
     users_meRoute,
-    editRoute,
-    deleteRoute
+    updateUserRoute,
+    deleteUserRoute
 ];
 
-const initExpressApp = require('./server/initExpressApp');
-const dbConnect = require('./db/connect');
-
-initExpressApp(app);
+const initExpressApp = require('@server/initExpressApp');
+const dbConnect = require('@db/connect');
 
 const initConnection = async () => {
+
+    const app = express();
+    const port = process.env.PORT;
+
     await dbConnect();
 
-    // await User.create({
-    //     id: 'qwer',
-    //     password: 'thisispassword',
-    //     name: '박종혁',
-    //     age: '25',
-    // });
+    initExpressApp(app);
+
+    routes.forEach(route => {
+        app[route.method](route.path, (req, res) => {
+            route.handler(req, res)
+                .catch((err) => {
+                    console.error('Api Error', err);
+
+                    const [statusCode, errorMessage] = err.message.split(':');
+
+                    return res.status(statusCode).json({ 
+                        success: false, 
+                        message: errorMessage,
+                    });
+                });
+        });
+    });
+    
+    app.listen(port, () => {
+        console.log(`Server is Running in ${port}`);
+    });
 }
 
-initConnection();
+initConnection()
+    .catch((err) => {
+        console.error('Error is occured while running application. Error: ', err);
+    });
 
-routes.forEach(route => {
-    app[route.method](route.path, route.handler);
-});
-
-app.listen(port, () => {
-    console.log(`Server is Running in ${port}`);
-});
