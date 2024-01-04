@@ -4,6 +4,7 @@ const moduleAlias = require('module-alias');
 moduleAlias.addAliases({
     '@root': __dirname,
     '@db': __dirname + '/db',
+    '@lib': __dirname + '/lib',
     '@route': __dirname + '/server/routes',
     '@server': __dirname + '/server',
 });
