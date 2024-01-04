@@ -11,7 +11,7 @@ module.exports = {
 
         const newUser = _.pick(req.body, ['id', 'password', 'name', 'age']);
 
-        if(req.id !== undefined && await checkDuplicatedId(req.id)) throw new Error('400: 해당 아이디는 사용중입니다.');
+        if(req.id !== undefined && await checkDuplicatedId(req.body.id)) throw new Error('400: 해당 아이디는 사용중입니다.');
 
         if(newUser.password !== undefined) newUser.password = encryptPassword(newUser.password);
 
