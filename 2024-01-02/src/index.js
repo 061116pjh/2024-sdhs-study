@@ -11,26 +11,7 @@ moduleAlias.addAliases({
 
 require('dotenv').config();
 
-const usersRoute = require('@route/users/users');
-const users_meRoute = require('@route/users/users_me');
-const signupRoute = require('@route/users/signup');
-const signinRoute = require('@route/users/signin');
-const updateUserRoute = require('@route/users/updateUser');
-const deleteUserRoute = require('@route/users/deleteUser');
-
-const createPostsRoute = require('@route/posts/createPost');
-const getPostsRoute = require('@route/posts/getPosts');
-
-const routes = [
-    signupRoute,
-    signinRoute,
-    usersRoute,
-    users_meRoute,
-    updateUserRoute,
-    deleteUserRoute,
-    createPostsRoute,
-    getPostsRoute
-];
+const routes = require('@route/index');
 
 const initExpressApp = require('@server/initExpressApp');
 const dbConnect = require('@db/connect');
