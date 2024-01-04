@@ -100,13 +100,16 @@
               </p>
 
               <div class="extra-info">
+                <p>작성자: ${post.authorName}</p>
                 <p>작성일: ${post.createdAt}</p>
                 <p>수정일: ${post.updatedAt}</p>
               </div>
 
               <div class="buttons">
                 <a href="#">수정</a>
-                <a href="#">삭제</a>
+                <form action='/posts/${post._id}?_method=DELETE' method='post'>
+                  <button style="background: none; border: none; text-decoration: underline;">삭제</button>
+                </form>
               </div>
             </article>
           `; 
