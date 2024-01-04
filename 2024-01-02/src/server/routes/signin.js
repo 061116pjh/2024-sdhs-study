@@ -1,33 +1,25 @@
-const data = require('../../db/users');
-const initData = async () => {
-    return await data();
-}
-const users = initData();
+const User = require('../../db/users.schema');
+const encryptPassword = require("../../lib/encryptPassword");
 
 module.exports = {
     path: '/signin',
     method: 'post',
-    handler: (req, res) => {
+    handler: async (req, res) => {
         const { id, password } = req.body;
 
-        let success = false;
-
-        const findUserByIdAndPassword = () => {
-            const user = users.find(user => {
-                return user.id === id && user.password == encryptPassword(password);
+        const findUserByIdAndPassword = async () => {
+            return await User.findOne({
+                id,
+                password: encryptPassword(password),
             });
-            return user;
         }
 
-        const user = findUserByIdAndPassword();
+        const user = await findUserByIdAndPassword();
 
-        if(user){
-            success = true;
-            req.session.idx = user.idx;
-        }
+        if(user === null) throw new Error('401: 아이디와 비밀번호가 일치하지 않습니다.');
+        
+        req.session.idx = user._id;
 
-        return res.json({ success });
-
-
+        return res.json({ success: true });
     }
 }
