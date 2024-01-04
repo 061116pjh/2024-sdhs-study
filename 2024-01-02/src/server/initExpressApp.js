@@ -10,5 +10,5 @@ module.exports = (app) => {
         cookie: { secure: false }
     }));
     app.use(express.json());
-    app.use(express.static('../../static'));
+    app.use(express.static('static'));
 }
