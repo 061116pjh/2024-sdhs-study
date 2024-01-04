@@ -9,6 +9,6 @@ module.exports = (app) => {
         secret: 'keyboard cat',
         cookie: { secure: false }
     }));
-    app.use(express.json());
+    app.use(express.urlencoded({ extended: true }));
     app.use(express.static('static'));
 }
