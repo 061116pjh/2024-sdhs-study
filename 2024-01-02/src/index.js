@@ -11,12 +11,12 @@ moduleAlias.addAliases({
 
 require('dotenv').config();
 
-const usersRoute = require('@route/users');
-const users_meRoute = require('@route/users_me');
-const signupRoute = require('@route/signup');
-const signinRoute = require('@route/signin');
-const updateUserRoute = require('@route/updateUser');
-const deleteUserRoute = require('@route/deleteUser');
+const usersRoute = require('@route/users/users');
+const users_meRoute = require('@route/users/users_me');
+const signupRoute = require('@route/users/signup');
+const signinRoute = require('@route/users/signin');
+const updateUserRoute = require('@route/users/updateUser');
+const deleteUserRoute = require('@route/users/deleteUser');
 
 const routes = [
     signupRoute,
