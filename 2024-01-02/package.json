@@ -7,7 +7,7 @@
     "start": "node ./src/index.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "nodemon ./src/index.js",
-    "build": "tsc ./src/lib/encryptPassword.ts"
+    "build": "tsc"
   },
   "author": "",
   "license": "ISC",
