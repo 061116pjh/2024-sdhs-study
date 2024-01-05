@@ -35,3 +35,11 @@
 //         return res.json();
 //     }
 // }
+
+type Student = Record<string, number | string>;
+
+const  getStudentInfo = <T> (student: Student, key: string):T => {
+    return 1 as any;
+}
+
+const a = getStudentInfo({ age: 1, name: '홍길동' } as Student, 'student');
