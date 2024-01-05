@@ -1,5 +1,5 @@
-const express = require('express');
-const moduleAlias = require('module-alias'); // ts path alias
+import express from 'express';
+// import ts path alias
 
 declare module 'express-session'{
     interface SessionData{
@@ -7,20 +7,10 @@ declare module 'express-session'{
     }
 }
 
-moduleAlias.addAliases({
-    '@root': __dirname,
-    '@db': __dirname + '/db',
-    '@lib': __dirname + '/lib',
-    '@route': __dirname + '/server/routes',
-    '@server': __dirname + '/server',
-});
-
 require('dotenv').config();
 
-const routes = require('@route/index');
-
-const initExpressApp = require('@server/initExpressApp');
-const dbConnect = require('@db/connect');
+import { initExpressApp } from './serverinit/initExpressApp';
+import { dbConnect } from './db/connect';
 
 const initConnection = async () => {
 
