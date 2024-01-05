@@ -1,5 +1,7 @@
 import * as crypto from 'crypto';
 
+// allowSyntheticDefaultImports: true
+
 const encryptPassword = (password: string): string => {
     return crypto
         .createHash('sha256')
