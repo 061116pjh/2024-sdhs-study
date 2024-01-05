@@ -9,7 +9,7 @@ declare module 'express-session'{
 
 require('dotenv').config();
 
-import { initExpressApp } from './serverinit/initExpressApp';
+import { initExpressApp } from './server/initExpressApp';
 import { dbConnect } from './db/connect';
 
 const initConnection = async () => {
