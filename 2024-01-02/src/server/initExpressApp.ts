@@ -1,8 +1,8 @@
-const express = require('express');
-const session = require('express-session');
-const methodOverride =  require('method-override');
+import express, { Application } from'express';
+import session from'express-session';
+import methodOverride from 'method-override';
 
-module.exports = (app) => {
+export const initExpressApp = (app: Application) => {
     app.set('trust proxy', 1);
 
     app.use(express.json());
