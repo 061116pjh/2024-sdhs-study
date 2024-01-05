@@ -1,16 +1,24 @@
 import express from 'express';
 // import ts path alias
 
+import { dbConnect } from './db/connect';
+import { initExpressApp } from './server/initExpressApp';
+
+import { Route } from './types/Route';
+import { createPostRoute } from './server/routes/posts/createPost';
+
+require('dotenv').config();
+
 declare module 'express-session'{
     interface SessionData{
         _id?: string;
     }
 }
 
-require('dotenv').config();
+const routes: Route[] = [
+    createPostRoute,
+]
 
-import { initExpressApp } from './server/initExpressApp';
-import { dbConnect } from './db/connect';
 
 const initConnection = async () => {
 
