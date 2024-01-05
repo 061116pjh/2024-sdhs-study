@@ -1,6 +1,11 @@
 const express = require('express');
-const moduleAlias = require('module-alias');
-// ts path alias
+const moduleAlias = require('module-alias'); // ts path alias
+
+declare module 'express-session'{
+    interface SessionData{
+        _id?: string;
+    }
+}
 
 moduleAlias.addAliases({
     '@root': __dirname,
