@@ -4,21 +4,22 @@ import express from 'express';
 import { dbConnect } from './db/connect';
 import { initExpressApp } from './server/initExpressApp';
 
+require('dotenv').config();
+
 import { Route } from './types/Route';
 import { createPostRoute } from './server/routes/posts/createPost';
+import { deletePostRoute } from './server/routes/posts/deletePost';
 
-require('dotenv').config();
+const routes: Route[] = [
+    createPostRoute,
+    deletePostRoute,
+]
 
 declare module 'express-session'{
     interface SessionData{
         _id?: string;
     }
 }
-
-const routes: Route[] = [
-    createPostRoute,
-]
-
 
 const initConnection = async () => {
 
