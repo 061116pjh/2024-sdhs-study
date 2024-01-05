@@ -1,5 +1,6 @@
 const express = require('express');
 const moduleAlias = require('module-alias');
+// ts path alias
 
 moduleAlias.addAliases({
     '@root': __dirname,
