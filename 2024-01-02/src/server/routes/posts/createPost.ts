@@ -1,9 +1,10 @@
-const _ = require('lodash');
-const Post = require('@db/posts.schema');
+import _ from 'lodash';
+import { Post } from '../../../db/posts.schema';
+import { Route, Method } from '../../../types/Route';
 
-module.exports = {
+export const createPostRoute: Route = {
     path: '/posts',
-    method: 'post',
+    method: Method.POST,
     handler: async (req, res) => {
         const { _id } = req.session;
 
