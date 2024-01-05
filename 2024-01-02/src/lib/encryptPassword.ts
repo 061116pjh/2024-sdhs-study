@@ -1,6 +1,6 @@
-const crypto = require('crypto');
+import crypto from 'crypto';
 
-module.exports = encryptPassword = (password) => {
+export const encryptPassword = (password: string): string => {
     return crypto
         .createHash('sha256')
         .update(password + 'sdhs')
