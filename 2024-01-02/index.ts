@@ -1,4 +1,4 @@
-import { Request, Response } from 'express';
+import Express, { Request, Response, Application } from 'express';
 
 interface Server{
     start: () => Promise<void>,
@@ -6,6 +6,20 @@ interface Server{
     getUpTime: () => number,
 }
 
+class ExpressServer implements Server{
+    private readonly app: Application;
+    private readonly port = process.env.PORT;
+
+    constructor(){
+        this.app = Express();
+    }
+
+    async start(){
+        this.app.listen(this.port, () => {
+            console.log('server is running on port: ', this.port);
+        });
+    }
+}
 
 interface Route{
     path: string,
@@ -17,7 +31,7 @@ const signinRoute: Route = {
     path: '/signin',
     method: 'post',
     handler: async (req, res) => {
-        
+
         return res.json();
     }
 }
